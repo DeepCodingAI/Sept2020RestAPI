@@ -3,6 +3,7 @@ package employeeinfo;
 import io.restassured.response.Response;
 import org.testng.Assert;
 
+import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
 
 public class SingleEmployeeResources {
@@ -27,5 +28,19 @@ public class SingleEmployeeResources {
         System.out.println(statusLine);
         Assert.assertEquals(statusLine,"HTTP/1.1 404 Not Found");
         Assert.assertEquals(statusCode,404);
+    }
+
+    public static int getSingleEmployeeWithValidRequest(String baseUrl,String path){
+        Response response = get(baseUrl+ path);
+        String statusLine = response.getStatusLine();
+        int statusCode = response.statusCode();
+        return statusCode;
+    }
+
+    public static int getSingleEmployeeWithInValidRequest(String baseUrl,String path){
+        Response response = get(baseUrl+ path);
+        String statusLine = response.getStatusLine();
+        int statusCode = response.statusCode();
+        return statusCode;
     }
 }
